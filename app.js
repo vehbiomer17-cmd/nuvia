@@ -26,3 +26,34 @@ document.addEventListener('keydown',e=>{if(cartEl.hidden)return;if(e.key==='Esca
 const menuButton=document.querySelector('.menu-toggle'),navigation=document.querySelector('#navigation');menuButton.addEventListener('click',()=>{const open=navigation.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');menuButton.textContent=open?'✕':'☰'});navigation.addEventListener('click',e=>{if(e.target.closest('a')){navigation.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='☰'}});
 try{document.querySelectorAll('[data-save]').forEach(b=>{if(localStorage.getItem(`nuvia-place-${b.dataset.save}`)==='true'){b.setAttribute('aria-pressed','true');b.textContent='♥ Lugar guardado'}})}catch{}
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});document.querySelectorAll('.section-heading,.product-copy,.feature-list>div,.capsule-packs,.ecosystem-diagram,.community-card,.store-card').forEach(el=>{el.classList.add('reveal');observer.observe(el)})}renderCart();
+
+// SVG strokes keep controls consistent across macOS, iOS and other platforms.
+const iconPaths = {"↗": "M5 19 19 5M5 5h14v14", "→": "M4 12h16m-6-6 6 6-6 6", "↓": "M12 4v16m-6-6 6 6 6-6", "✓": "m5 12 4 4L19 6", "✕": "m6 6 12 12M6 18 18 6", "☰": "M4 6h16M4 12h16M4 18h16", "▷": "m8 5 11 7-11 7Z", "◷": "M12 7v5l3 2|circle", "◎": "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8|circle", "↻": "M20 7v5h-5M19 12a7 7 0 1 1-2-5", "♡": "M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z", "♥": "M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z", "★": "m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L3 9.6l6.2-.9Z", "✳": "M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4 18.4 5.6", "♧": "M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M2 21v-2a6 6 0 0 1 12 0v2M16 4a4 4 0 0 1 0 8M18 15a6 6 0 0 1 4 6", "⌖": "M12 22s8-7 8-14a8 8 0 1 0-16 0c0 7 8 14 8 14ZM12 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6", "⌂": "m3 10 9-7 9 7v11H3ZM9 21v-8h6v8", "⌕": "M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14m5 12 6 6", "⊕": "M12 6v12M6 12h12|circle", "◯": "M21 11a9 9 0 0 1-9 9H4l-2 2V11a9 9 0 1 1 19 0Z", "☀": "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5", "ⓘ": "M12 10v7M12 6h.01|circle", "♨": "M5 9h12v7a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4ZM17 10h2a3 3 0 0 1 0 6h-2M8 3v3m4-3v3m4-3v3", "▯": "M6 2h12v20H6ZM10 18h4", "▤": "M4 5h16v15H4ZM4 10h16m-16 5h16"};
+function replaceTextIcons(root) {
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ const nodes=[];
+ while(walker.nextNode()) {
+  const node=walker.currentNode;
+  if(!node.parentElement.closest('script,style,svg,textarea') && [...node.data].some(c=>iconPaths[c]))nodes.push(node);
+ }
+ for(const node of nodes) {
+  const fragment=document.createDocumentFragment();
+  for(const char of node.data) {
+   if(!iconPaths[char]){fragment.append(document.createTextNode(char));continue;}
+   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   svg.setAttribute('class','ui-icon'+('♥★'.includes(char)?' icon-filled':''));
+   svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+   const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',iconPaths[char].replace('|circle',''));svg.append(path);
+   if(iconPaths[char].includes('|circle')){const circle=document.createElementNS(svg.namespaceURI,'circle');circle.setAttribute('cx','12');circle.setAttribute('cy','12');circle.setAttribute('r','9');svg.append(circle);}
+   fragment.append(svg);
+  }
+  node.replaceWith(fragment);
+ }
+}
+replaceTextIcons(document.body);
+const iconObserver=new MutationObserver(records=>{
+ const roots=new Set();
+ for(const record of records){if(record.type==='characterData'){if(record.target.parentElement)roots.add(record.target.parentElement);}else for(const node of record.addedNodes){if(node.nodeType===1)roots.add(node);else if(node.nodeType===3&&node.parentElement)roots.add(node.parentElement);}}
+ roots.forEach(replaceTextIcons);
+});
+iconObserver.observe(document.body,{childList:true,subtree:true,characterData:true});

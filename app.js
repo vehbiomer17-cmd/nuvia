@@ -57,3 +57,16 @@ const iconObserver=new MutationObserver(records=>{
  roots.forEach(replaceTextIcons);
 });
 iconObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+
+// Registration preview; no credentials are stored or transmitted.
+document.addEventListener('click',event=>{
+ if(!event.target.closest('[data-register]'))return;
+ openModal(`<span class="eyebrow">BIENVENIDO A NÜVIA</span><h2>Sumate a la comunidad.</h2><p>Un espacio para descubrir, compartir y conectar.</p><form id="register-form"><label for="register-name">Tu nombre</label><input id="register-name" name="name" autocomplete="name" required maxlength="100"><label for="register-email">Correo electrónico</label><input id="register-email" name="email" type="email" autocomplete="email" placeholder="vos@ejemplo.com" required><label for="register-password">Contraseña</label><input id="register-password" name="password" type="password" minlength="8" autocomplete="new-password" placeholder="Al menos 8 caracteres" required><button class="button" type="submit">Crear cuenta</button></form><small>Formulario de demostración. Todavía no se crean cuentas ni se envían o guardan tus datos.</small>`);
+});
+document.addEventListener('submit',event=>{
+ if(event.target.id!=='register-form')return;
+ event.preventDefault();
+ event.target.reset();
+ document.querySelector('#modal-content').innerHTML='<h2>Gracias por tu interés.</h2><p>El formulario se validó correctamente. La creación de cuentas estará disponible al lanzamiento.</p><p>No se creó una cuenta ni se guardaron tus datos.</p><button class="button modal-close-action">Seguir explorando</button>';
+ document.querySelector('#modal-content button').focus();
+});

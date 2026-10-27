@@ -14,3 +14,37 @@
 .register-button:hover{color:var(--green)}
 @media(max-width:1000px) and (min-width:761px){.navbar{gap:14px}.navbar nav{gap:10px}.nav-actions{gap:10px}.register-button{font-size:12px}}
 @media(max-width:760px){.register-button{font-size:12px}.nav-actions{gap:7px}.navbar .small{display:none}.navbar{gap:12px}}
+
+/* Official GLUNOVA artwork, fitted within the existing branding areas. */
+.logo{display:inline-flex;align-items:center;flex-shrink:0}
+.logo img{display:block;width:100px;height:70px;object-fit:contain}
+.footer-brand .logo img{width:120px;height:100px}
+.phone-nav .logo img{width:65px;height:42px}
+.device-brand{font-size:16px;letter-spacing:0}
+.capsule-body>span{font-size:9px;letter-spacing:0}
+@media(max-width:760px){.navbar .logo img{width:90px;height:60px}}
+
+/* Community experience detail, using the site's existing colors and controls. */
+dialog.experience-modal{max-width:900px;max-height:calc(100dvh - 32px);overflow-y:auto;padding:38px}
+.experience-detail h2{padding-right:12px;margin-bottom:18px}
+.experience-author{display:flex;align-items:center;gap:12px;margin-bottom:22px;font-size:13px}
+.experience-author img{border-radius:50%;flex-shrink:0}
+.experience-author>div{flex:1}.experience-author>div>span{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+.experience-photo{display:block;width:100%;height:230px;object-fit:cover;border-radius:12px;margin-bottom:26px}
+.experience-columns{display:grid;grid-template-columns:1.15fr 1fr;gap:30px}
+.experience-detail h3{font-size:15px;letter-spacing:-.3px;margin-bottom:10px}
+.experience-detail p{font-size:13px;margin-bottom:20px}
+.experience-review blockquote{margin:0 0 16px;padding-left:16px;border-left:3px solid var(--lime);font:500 18px/1.6 Manrope,sans-serif}
+.experience-highlights{display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:0 0 24px;list-style:none}
+.experience-highlights li{background:#eef3e7;border-radius:20px;padding:7px 10px;font-size:11px}
+.experience-tip{padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--cream)}
+.experience-tip p{margin:0}
+.experience-location{min-width:0;border:1px solid var(--border);border-radius:12px;padding:18px;align-self:start}
+.experience-category{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:10px}
+.experience-location iframe{display:block;width:100%;height:220px;border:0;border-radius:8px;background:var(--cream)}
+.experience-location .button{width:100%;font-size:11px;gap:8px;margin-top:12px;padding:12px}
+.experience-location small{font-size:10px;margin:10px 0 15px}
+.experience-detail .experience-note{border-top:1px solid var(--border);padding-top:18px;margin-top:26px}
+@media(max-width:640px){dialog.experience-modal{padding:32px 20px 24px}.experience-columns{grid-template-columns:minmax(0,1fr);gap:24px}.experience-photo{height:190px}.experience-author{flex-wrap:wrap}.experience-author .stars{flex-basis:100%}.experience-detail h2{font-size:27px}}
+
+.store-art .product-photo{width:100%;height:100%;object-fit:contain;padding:20px}

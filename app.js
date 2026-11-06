@@ -11,8 +11,8 @@ let experienceDetails=[
 ];
 const safeText = Glunova.escape;
 const safeImage = value => safeText(Glunova.imageURL(value));
-const postImage = (p,width=700) => p.image_url ? p.image_url : p.image ? `https://images.unsplash.com/${p.image}?w=${width}&auto=format&fit=crop&q=80` : 'logo.jpeg';
-const postAvatar = p => p.avatar_url || (p.avatar ? `https://i.pravatar.cc/70?img=${p.avatar}` : 'logo.jpeg');
+const postImage = (p,width=700) => p.image_url ? p.image_url : p.image ? `https://images.unsplash.com/${p.image}?w=${width}&auto=format&fit=crop&q=80` : 'logofin.png';
+const postAvatar = p => p.avatar_url || (p.avatar ? `https://i.pravatar.cc/70?img=${p.avatar}` : 'logofin.png');
 const postRating = p => p.rating || 5;
 const favoriteKey = index => `nuvia-place-${posts[index]?.id || index}`;
 let productLoadFailed=false, experienceLoadFailed=false;

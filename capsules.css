@@ -1,0 +1,18 @@
+.capsule-validation{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.capsule-validation-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.capsule-validation h2{margin-bottom:22px}.capsule-validation p{font-size:14px}
+.capsule-validation ol{padding-left:22px;font-size:14px;line-height:1.8;color:var(--ink)}
+.capsule-validation-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:30px;min-width:0}
+.capsule-validation label{display:block;font-size:13px;font-weight:600;margin-bottom:18px}
+.capsule-validation input,.capsule-validation select{display:block;width:100%;margin-top:8px;padding:13px;border:1px solid #b8c5b5;border-radius:8px;background:white;color:var(--ink);font:inherit}
+.capsule-validation input{text-transform:uppercase;letter-spacing:.8px}
+.capsule-validation .mode-note{font-size:12px;padding:14px;border-radius:8px;background:#eef3e7;margin-bottom:20px;line-height:1.7}
+.capsule-validation .mode-note code{font-size:11px;white-space:nowrap}
+.capsule-validation .button{width:100%}.capsule-validation button:disabled{opacity:.6;cursor:wait}
+#capsule-message{margin-top:18px;min-height:3em;font-size:13px}.capsule-validation .is-error{color:#9b3029}
+.capsule-pin-result{border-top:1px solid var(--border);margin-top:20px;padding-top:20px;text-align:center;outline-offset:6px}
+#capsule-pin{display:block;font:700 clamp(42px,8vw,64px)/1.4 Manrope,sans-serif;letter-spacing:12px;color:var(--forest);font-variant-numeric:tabular-nums}
+.capsule-validation .capsule-limit{font-size:12px;margin-top:24px}.capsule-validation small{display:block;font-size:11px;line-height:1.7;color:var(--muted)}
+#capsule-countdown{margin-bottom:15px}#capsule-consume-demo{margin-top:16px}
+@media(min-width:761px) and (max-width:1250px){.navbar .small{display:none}.navbar nav{gap:12px}.navbar nav a{font-size:11px}}
+@media(max-width:760px){.capsule-validation-layout{grid-template-columns:minmax(0,1fr);gap:28px}.capsule-validation-card{padding:22px}.capsule-validation h2{font-size:32px}}

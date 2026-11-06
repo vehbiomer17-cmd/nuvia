@@ -34,6 +34,7 @@
  }
  async function checkAccess(){
   const current=++generation;
+  globalThis.CapsuleAdmin?.reset();
   authorized=false;$('dashboard').hidden=true;$('login-panel').hidden=true;$('recovery-panel').hidden=true;
   const {data:{user},error}=await db.auth.getUser();
   if(current!==generation)return;
@@ -70,6 +71,7 @@
  },event.target);});
  $('logout').addEventListener('click',()=>run(async()=>{const {error}=await db.auth.signOut();if(error)throw error;await checkAccess();}));
  document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>run(async()=>{
+  globalThis.CapsuleAdmin?.hide();
   table=button.dataset.tab;
   document.querySelectorAll('[data-tab]').forEach(b=>{b.setAttribute('aria-pressed',String(b===button));b.classList.toggle('secondary',b!==button);});
   editor();await load();status('Contenido actualizado.');
